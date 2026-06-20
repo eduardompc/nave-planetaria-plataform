@@ -1,0 +1,20 @@
+# Task Checklist
+
+- [x] Open http://127.0.0.1:8050/
+- [x] Login as 'comandante' with password '1234' (if login page visible)
+- [x] Confirm redirect to /cockpit
+- [x] Click 'Visualizador 3D' tab and wait 4 seconds
+- [x] Verify it stays on 'Visualizador 3D'
+- [x] Click 'Catálogo Estelar' tab and wait 4 seconds
+- [x] Search for 'Sirius'
+- [x] Verify 'Sirius' card is visible
+- [x] Click 'Marcar Observado' on Sirius (Triggered callback, but failed to save/register)
+- [x] Click 'Configurações' tab (Failed with callback error)
+- [x] Verify 'Observações' count is at least '1 astros' (Failed: count was 0 due to callback error)
+- [x] Check 'Missões Acadêmicas' tab
+- [x] Report results
+
+# Issues Encountered
+- When clicking 'Configurações' tab, a callback error occurs: `Callback error updating user-dashboard-content.children`.
+- The console logs reveal: `OSError: [Errno 22] Invalid argument` during this callback.
+- As a result, the 'Observações' count and XP do not update (remain at 0), preventing the completion of the verification step.

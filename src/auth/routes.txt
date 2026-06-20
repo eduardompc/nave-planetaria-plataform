@@ -1,0 +1,69 @@
+from dash import html, dcc
+from dash.dependencies import Input, Output, State
+from flask_login import login_user
+from src.api.users import authenticate
+from src.auth.login_manager import User
+from src.api.profiles import create_profile_if_missing
+
+def layout_login():
+return html.Div(
+    style={
+        "maxWidth": "400px",
+        "margin": "auto",
+        "padding": "40px",
+        "textAlign": "center"
+    },
+    children=[
+        html.H2("Acesso à Nave Planetária"),
+
+        dcc.Input(
+            id="login-username",
+            placeholder="Usuário",
+            type="text",
+            style={"width": "100%", "marginBottom": "10px"}
+        ),
+
+        dcc.Input(
+            id="login-password",
+            placeholder="Senha",
+            type="password",
+            style={"width": "100%", "marginBottom": "10px"}
+        ),
+
+        html.Button(
+            "Entrar",
+            id="login-button",
+            style={"width": "100%", "marginTop": "10px"}
+        ),
+
+        html.Div(id="login-feedback", style={"marginTop": "15px"})
+    ]
+)
+
+
+def register_callbacks(app):
+
+@app.callback(
+    Output("login-feedback", "children"),
+    Input("login-button", "n_clicks"),
+    State("login-username", "value"),
+    State("login-password", "value")
+)
+def login(n_clicks, username, password):
+    if not n_clicks:
+        return ""
+
+    user = authenticate(username, password)
+    if not user:
+        return "Credenciais inválidas."
+
+from src.api.profiles import create_profile_if_missing
+    login_user(User(user["id"], user["username"]))
+    create_profile_if_missing(user["id"])
+
+    # 🔥 TESTE CRÍTICO — AQUI É O LUGAR CERTO
+    from flask_login import current_user
+    print("LOGIN OK — USER:", user)
+    print("current_user.is_authenticated:", current_user.is_authenticated)
+
+    return dcc.Location(href="/cockpit", id="redirect-login")

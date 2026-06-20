@@ -1,0 +1,13 @@
+from .db import get_connection
+
+def add_mission(user_id, name):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO missions (user_id, mission_name)
+        VALUES (?, ?)
+    """, (user_id, name))
+
+    conn.commit()
+    conn.close()

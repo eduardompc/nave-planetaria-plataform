@@ -1,0 +1,13 @@
+from src.api.db import get_connection
+
+conn = get_connection()
+cursor = conn.cursor()
+
+cursor.execute("PRAGMA table_info(profiles)")
+cols = cursor.fetchall()
+
+for col in cols:
+    print(dict(col))
+
+conn.close()
+

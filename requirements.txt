@@ -1,0 +1,9 @@
+dash
+flask
+flask-login
+bcrypt
+requests
+gunicorn
+python-dotenv
+psycopg2-binary
+google-generativeai

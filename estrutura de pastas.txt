@@ -1,0 +1,25 @@
+nave-planetaria-plataform/
+   database/
+      nave.db
+      schema.sql
+      init_db.py
+
+src/
+   auth/
+      security.py
+      login_manager.py
+      routes.py
+      session.py
+
+src/
+  missions/
+    __init__.py
+    mission_definitions.py
+    mission_engine.py
+api/
+  missions.py   # já referenciado no banco, agora vamos completar
+
+src/
+  user/
+    dashboard.py
+    __init__.py
