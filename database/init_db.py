@@ -38,8 +38,8 @@ def init_db():
     # Admin
     cursor.execute("SELECT id FROM users WHERE username = ?", ("admin",))
     u_admin = cursor.fetchone()
+    password_hash = hash_password("nave2026")
     if not u_admin:
-        password_hash = hash_password("Aikaluna@24")
         cursor.execute("""
             INSERT INTO users (username, password_hash)
             VALUES (?, ?)
@@ -52,7 +52,10 @@ def init_db():
             INSERT INTO profiles (user_id, rank, xp, theme_preference, theme, last_login)
             VALUES (?, 'Comandante', 100, 'auto', 'auto', ?)
         """, (uid, None))
-        print("Usuário 'admin' (senha 'Aikaluna@24') criado com sucesso.")
+        print("Usuário 'admin' (senha 'nave2026') criado com sucesso.")
+    else:
+        cursor.execute("UPDATE users SET password_hash = ? WHERE username = ?", (password_hash, "admin"))
+        print("Senha do usuário 'admin' atualizada para 'nave2026'.")
 
     # 2) Insere os setores estelares se vazio
     cursor.execute("SELECT COUNT(*) FROM star_sectors")

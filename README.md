@@ -94,6 +94,17 @@ python app.py
 ```
 Acesse o painel em: `http://127.0.0.1:8050/`
 
+### 🔑 Credenciais Padrão (Semeadas)
+
+Para fazer o login e testar a plataforma, você pode utilizar um dos usuários padrão criados na inicialização do banco:
+* **Usuário Comum (Piloto):**
+  * **Usuário:** `comandante`
+  * **Senha:** `1234`
+* **Usuário Administrador:**
+  * **Usuário:** `admin`
+  * **Senha:** `nave2026`
+
+
 ---
 
 ## 🤖 Como Interagir com o Co-Piloto no Cockpit
